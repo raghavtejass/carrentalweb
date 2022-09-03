@@ -1,2 +1,2 @@
-# car-rental project.
+# car-rental website for apartment community
 
