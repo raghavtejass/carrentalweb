@@ -1,0 +1,98 @@
+<?php
+
+include("connection/connect.php");
+error_reporting(0);
+$book = $_GET['book'];
+
+
+
+
+if(isset($_POST['submit']))                  //if submit button is pressed
+{   
+	$fname =$_POST_POS['fname'];
+	$lname =$_POST['lname'];
+	$phone =$_POST['phone'];
+	$code =$_POST['code'];
+	$address =$_POST['address'];
+	$pickup =$_POST['pickup'];
+	$date =$_POST['date'];
+	$return =$_POST['return'];
+	$cname=$_POST['cname'];
+ 
+                     
+
+	if($fname==' '||$lname==' '||$phone==' '||$code==' '||$address==' '||$pickup==' '||$date==' '||$return==' '||$cname==' ')
+	{
+	
+	               echo '<div class="alert alert-dismissable fade in">';
+                    echo	'<a href="#"  data-dismiss="alert" ></a>';				
+				    echo ' All Text Fields must be required!';
+					echo  	'</div>';	
+	
+	}
+	else
+	{
+	  
+					
+	$sql = "INSERT INTO personal(fname,lname,phone,code,address,pickup,date,return,cname) VALUES ('$fname','$lname','$phone','$code','$address','$pickup','$date','$return','$cname')";
+	mysqli_query($db, $sql);
+	
+  echo '<div class="alert alert-success alert-dismissable fade in">';
+ echo	'<a href="#" data-dismiss="alert" ></a>';
+ echo 'Your Booking details are successful. Here are the details';
+echo  	'</div>';
+	}
+}
+
+$sql="select * from admin,personal where v_id='$book'";
+$result=mysqli_query($db,$sql);
+$row=mysqli_fetch_array($result);
+						$id =  $row['v_id'];
+						$pid = $row['p_id'];
+						$cimage =  $row['cimage'];
+						$cname =  $row['cname'];
+						$price =  $row['price'];
+						$pickup = $row['pickup'];
+						$date = $row['date'];
+						$return = $row['return'];
+						
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Booking Details</title>
+		<meta charset="utf-8">
+		<meta name = "format-detection" content = "telephone=no" />
+		<link rel="icon" href="images/favicon.ico">
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="css/form.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+	<link rel="stylesheet" type="text/css" href="css/popup.php">
+	
+	
+	</head>
+	<body class="" id="top">
+		<div class="main">
+<!--==============================header=================================-->
+			<header>
+				<div class="menu_block ">
+					<div class="container_12">
+						<div class="grid_12">
+							<nav class="horizontal-nav full-width horizontalNav-notprocessed">
+								<ul class="sf-menu">
+									<li><a href="index.php">Home</a></li>
+								
+	
+									<li><a href="result.php">Cars</a></li>
+									<li ><a href="contact.php">Contacts</a></li>
+								</ul>
+							</nav>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</header>
